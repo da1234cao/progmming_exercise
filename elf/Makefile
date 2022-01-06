@@ -1,11 +1,13 @@
+APPS = get_elf_func_offset  get_elf_func_offset_by_readelf
+
 .PHONY:all
 
-all:get_elf_func_offset
+all:$(APPS)
 
-get_elf_func_offset:get_elf_func_offset.c
-	gcc  $^ -lelf -o $@
+$(APPS): %: %.c
+	gcc  $< -lelf -o $@
 
 .PHONY:clean
 
 clean:
-	rm -rf get_elf_func_offset
+	rm -rf $(APPS)
